@@ -1,13 +1,9 @@
-import axios from 'axios';
-import { Config } from '../config';
-
-export interface GpxData {
-  name: string;
-  content: string;
-}
+import axios, { AxiosHeaders } from 'axios';
+import { Config } from '../../config';
+import { GpxData } from './geovelo.model';
 
 export class GeoveloService {
-  private accessToken = '';
+  private accessToken: string | null = null;
 
   constructor(private readonly config: Config) {}
 
@@ -20,12 +16,7 @@ export class GeoveloService {
     formData.append('title', gpx.name);
 
     await axios.post(`https://backend.geovelo.fr/api/v2/user_trace_from_gpx`, formData, {
-      headers: {
-        Authorization: this.accessToken,
-        'Api-key': this.config.geovelo.apiKey,
-        Source: this.config.geovelo.source,
-        'Content-Type': `multipart/form-data`,
-      },
+      headers: this.getGeoveloHeaders(),
     });
   }
 
@@ -37,14 +28,27 @@ export class GeoveloService {
         const base64 = buff.toString('base64')
     */
 
+    const headers = this.getGeoveloHeaders();
+
+    headers.set('Authentication', this.config.geovelo.authentification);
+
     const response = await axios.post(`https://backend.geovelo.fr/api/v1/authentication/geovelo`, '', {
-      headers: {
-        Authentication: this.config.geovelo.authentification,
-        'Api-key': this.config.geovelo.apiKey,
-        Source: this.config.geovelo.source,
-      },
+      headers,
     });
 
     this.accessToken = response.headers['authorization'];
+  }
+
+  private getGeoveloHeaders(): AxiosHeaders {
+    const headers = AxiosHeaders.from({
+      'Api-key': this.config.geovelo.apiKey,
+      Source: this.config.geovelo.source,
+    });
+
+    if (this.accessToken) {
+      headers.set('Authorization', this.accessToken);
+    }
+
+    return headers;
   }
 }
