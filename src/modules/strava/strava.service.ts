@@ -62,7 +62,7 @@ export class StravaService {
       const temp = getStream('temp');
 
       const points = latlngs.map(([lat, lng], index) => {
-        const time = times?.[index];
+        const time = times?.[index] ?? 0;
 
         return new Point(lat, lng, {
           ele: altitude?.[index],
