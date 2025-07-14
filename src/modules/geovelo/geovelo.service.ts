@@ -20,16 +20,17 @@ export class GeoveloService {
     });
   }
 
-  private async authenticate() {
-    /*
-        Authentication creation
-        const data = `${this.login};${this.password}`
-        const buff = Buffer.from(data)
-        const base64 = buff.toString('base64')
-    */
+  getAuthentication(login: string, password: string): string {
+    const data = `${login};${password}`;
+    const buff = Buffer.from(data);
 
+    return buff.toString('base64');
+  }
+
+  private async authenticate() {
     const headers = this.getGeoveloHeaders();
 
+    // see getAuthentication for authentication creation
     headers.set('Authentication', this.config.geovelo.authentification);
 
     const response = await axios.post(`https://backend.geovelo.fr/api/v1/authentication/geovelo`, '', {

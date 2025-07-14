@@ -79,4 +79,12 @@ describe('e2e tests', () => {
 
     await service.createCredentials(CODE);
   });
+
+  it.skip('get geovelo authentication code', async () => {
+    const config = parseConfig();
+
+    const service = new GeoveloService(config);
+
+    console.log(service.getAuthentication('test', 'test'));
+  });
 });
