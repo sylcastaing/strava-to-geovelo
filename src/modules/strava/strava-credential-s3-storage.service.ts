@@ -6,7 +6,7 @@ import aws4 from 'aws4';
 export class StravaCredentialS3StorageService extends StravaCredentialStorageService {
   async getCredentials(): Promise<StravaCredentials> {
     const response = await axios.get<StravaCredentials>(
-      `https://${this.config.storage.bucket}${this.config.storage.credentialPath}`,
+      `${this.config.storage.endpoint}${this.config.storage.credentialPath}`,
       {
         headers: this.getBucketHeaders('GET'),
       },
@@ -17,7 +17,7 @@ export class StravaCredentialS3StorageService extends StravaCredentialStorageSer
 
   async saveCredentials(credentials: StravaCredentials): Promise<void> {
     await axios.put(
-      `https://${this.config.storage.bucket}${this.config.storage.credentialPath}`,
+      `${this.config.storage.endpoint}${this.config.storage.credentialPath}`,
       this.validateCredentials(credentials),
       {
         headers: this.getBucketHeaders('PUT'),
@@ -31,7 +31,7 @@ export class StravaCredentialS3StorageService extends StravaCredentialStorageSer
         service: 's3',
         region: this.config.storage.region,
         method,
-        host: this.config.storage.bucket,
+        host: new URL(this.config.storage.endpoint).host,
         path: this.config.storage.credentialPath,
       },
       {

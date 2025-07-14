@@ -1,0 +1,10 @@
+*.tfvars
+*.tfvars.*
+
+*.tfstate
+*.tfstate.*
+
+*.terraform
+*.terraform.*
+
+function.zip

@@ -11,7 +11,7 @@ export const configMock: Config = {
     source: 'test-source',
   },
   storage: {
-    bucket: 'test-bucket',
+    endpoint: 'https://test.com',
     region: 'test-region',
     accessKeyId: 'test-access-key',
     secretAccessKey: 'test-secret-key',

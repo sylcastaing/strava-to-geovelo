@@ -5,6 +5,7 @@ import { GeoveloService } from '../src/modules/geovelo/geovelo.service';
 import { StravaAuthentificationService } from '../src/modules/strava/strava-authentification.service';
 import { parse } from 'dotenv';
 import fs from 'node:fs';
+import { StravaCredentialS3StorageService } from '../src/modules/strava/strava-credential-s3-storage.service';
 
 describe('e2e tests', () => {
   beforeAll(() => {
@@ -71,7 +72,7 @@ describe('e2e tests', () => {
   });
 
   it.skip('create strava credentials', async () => {
-    const CODE = 'test-code';
+    const CODE = '1e264ab2d844b1af025a0ae89488fb3a290259c8';
 
     const config = parseConfig();
 

@@ -34,7 +34,7 @@ describe('StravaCredentialS3StorageService', () => {
 
       expect(aws4Spy).toHaveBeenCalledExactlyOnceWith(
         expect.objectContaining({
-          host: 'test-bucket',
+          host: 'test.com',
           method: 'GET',
           path: '/test/path',
           region: 'test-region',
@@ -47,7 +47,7 @@ describe('StravaCredentialS3StorageService', () => {
       );
 
       expect(axios.get).toHaveBeenCalledExactlyOnceWith(
-        'https://test-bucket/test/path',
+        'https://test.com/test/path',
         expect.objectContaining({ headers: expect.any(Object) }),
       );
     });
@@ -69,7 +69,7 @@ describe('StravaCredentialS3StorageService', () => {
 
       expect(aws4Spy).toHaveBeenCalledExactlyOnceWith(
         expect.objectContaining({
-          host: 'test-bucket',
+          host: 'test.com',
           method: 'PUT',
           path: '/test/path',
           region: 'test-region',
@@ -82,7 +82,7 @@ describe('StravaCredentialS3StorageService', () => {
       );
 
       expect(axios.put).toHaveBeenCalledExactlyOnceWith(
-        'https://test-bucket/test/path',
+        'https://test.com/test/path',
         mockCredentials,
         expect.objectContaining({ headers: expect.any(Object) }),
       );

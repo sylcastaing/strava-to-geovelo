@@ -12,7 +12,7 @@ describe('config', () => {
     vi.stubEnv('GEOVELO_AUTHENTIFICATION', 'test_auth');
     vi.stubEnv('GEOVELO_API_KEY', 'test_api_key');
     vi.stubEnv('GEOVELO_SOURCE', 'test_source');
-    vi.stubEnv('STORAGE_BUCKET', 'test_bucket');
+    vi.stubEnv('STORAGE_ENDPOINT', 'https://test.com');
     vi.stubEnv('STORAGE_REGION', 'us-east-1');
     vi.stubEnv('STORAGE_ACCESS_KEY_ID', 'test_access_key');
     vi.stubEnv('STORAGE_SECRET_ACCESS_KEY', 'test_secret_key');
@@ -31,7 +31,7 @@ describe('config', () => {
         source: 'test_source',
       },
       storage: {
-        bucket: 'test_bucket',
+        endpoint: 'https://test.com',
         region: 'us-east-1',
         accessKeyId: 'test_access_key',
         secretAccessKey: 'test_secret_key',
