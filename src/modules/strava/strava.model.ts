@@ -7,11 +7,12 @@ export const StravaCredentials = z.object({
 });
 export type StravaCredentials = z.infer<typeof StravaCredentials>;
 
-export interface StravaActivity {
-  id: string;
-  name: string;
-  start_date: string;
-}
+export const StravaActivity = z.object({
+  id: z.coerce.string().min(1),
+  name: z.string().min(1),
+  start_date: z.string().min(1),
+});
+export type StravaActivity = z.infer<typeof StravaActivity>;
 
 export const streamTypes = ['latlng', 'time', 'altitude', 'heartrate', 'cadence', 'watts', 'temp'] as const;
 export type StreamType = (typeof streamTypes)[number];
